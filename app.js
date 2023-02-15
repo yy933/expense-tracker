@@ -2,10 +2,11 @@ const express = require('express')
 const app = express()
 const port = 3000
 const mongoose = require('mongoose')
-mongoose.connect(process.env.MONGODB_URI)
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
 }
+mongoose.connect(process.env.MONGODB_URI)
+
 // 取得資料庫連線狀態
 const db = mongoose.connection
 // 連線異常
