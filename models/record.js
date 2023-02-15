@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema; 
 const recordSchema = new Schema({
   id:{
@@ -18,4 +18,4 @@ const recordSchema = new Schema({
     required: true,
   }
 });
-module.exports = mongoose.model("Record", recordSchema);
+module.exports = mongoose.model('Record', recordSchema);
