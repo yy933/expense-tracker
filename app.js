@@ -40,6 +40,9 @@ app.get("/edit", (req, res, next) => {
 app.get("/register", (req, res, next) => {
   res.render("register");
 });
+app.get("/login", (req, res, next) => {
+  res.render("login");
+});
 app.listen(port, () => {
   console.log(`App is runnung on http://localhost:${port}`)
 })
