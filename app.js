@@ -31,6 +31,9 @@ app.get('/', (req, res, next) => {
     .catch((error)=>console.log(error))
   
 })
+app.get('/new', (req, res, next)=>{
+  res.render('new')
+})
 app.listen(port, () => {
   console.log(`App is runnung on http://localhost:${port}`)
 })

@@ -1,11 +1,12 @@
 @font-face {
-  font-family:'Iansui';
-  src: url('../stylesheets/fonts/Iansui-Regular.ttf')format("truetype");
+  font-family:'huninn';
+  src: url('../stylesheets/fonts/jf-openhuninn-1.1.ttf')format("truetype");
 }
 html, body{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  height: 101%;
 }
 
 nav{
