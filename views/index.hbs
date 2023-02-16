@@ -1,1 +1,52 @@
-<h1>index</h1>
+<div class="container-sm">
+  <div class="row d-flex justify-content-center">
+    <div class="col text-center my-3">
+      <div class="btn-group col-sm-4" role="group" aria-label="Button group with nested dropdown">
+        <button type="button" class="btn btn-info">選擇類別</button>
+        <div class="btn-group" role="group">
+          <button id="btnGroupDrop3" type="button" class="btn btn-info dropdown-toggle show" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></button>
+          <div class="dropdown-menu show" aria-labelledby="btnGroupDrop3" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 42px, 0px);">
+            <a class="dropdown-item" href="#">家居</a>
+            <a class="dropdown-item" href="#">交通</a>
+            <a class="dropdown-item" href="#">休閒娛樂</a>
+            <a class="dropdown-item" href="#">餐飲</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex ">
+    <div class="col col-sm-12 text-center">
+      <span class="fs-6 text-muted align-top mx-2">總金額:</span>
+      <span class="fw-bold mx-3" style="color: rgb(88, 160, 180); font-size:3.8rem">3000</span>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center px-1">
+    <table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Icon</th>
+      <th scope="col">Item</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><span style="color: rgb(88, 160, 180);"><i class="fa-solid fa-house fa-lg"></i></span></th>
+      <td class="text-wrap">Dinner</td>
+      <td>200</td>
+      <td>
+        <button class="btn btn-outline-info btn-sm edit-btn mx-2"><span style="color: rgb(88, 160, 180);"><i class="fa-solid fa-pen"></i></span></button>
+        <button class="btn btn-outline-info btn-sm delete-btn"><span style="color: rgb(88, 160, 180);"><i class="fa-solid fa-trash"></i></span></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+  <div class="row d-flex justify-content-center my-3">
+    <div class="col col-sm-8 text-center">
+      <button class="btn btn-outline-info col-sm-4">新增支出</button>
+    </div>
+  </div>
+</div>
