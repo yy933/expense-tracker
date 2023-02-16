@@ -37,6 +37,9 @@ app.get('/new', (req, res, next)=>{
 app.get("/edit", (req, res, next) => {
   res.render("edit");
 });
+app.get("/register", (req, res, next) => {
+  res.render("register");
+});
 app.listen(port, () => {
   console.log(`App is runnung on http://localhost:${port}`)
 })
