@@ -1,19 +1,19 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema; 
 const recordSchema = new Schema({
-  id:{
-    type: Number,
-    required: true,
-  },
-  categoryId:{
+  // id:{
+  //   type: Number,
+  //   required: true,
+  // },
+  category:{
     type: String,
     required:true,
   },
-  userID:{
-    type: Number,
-    required: true,
-  },
-  name: {
+  // userID:{
+  //   type: Number,
+  //   required: true,
+  // },
+  itemName: {
     type: String, 
     required: true, 
   },
