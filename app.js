@@ -7,6 +7,7 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 const Record = require('./models/Record')
+const bodyParser = require('body-parser')
 mongoose.connect(process.env.MONGODB_URI)
 
 // 取得資料庫連線狀態
@@ -23,6 +24,7 @@ db.once('open', () => {
 app.engine("hbs", exphbs.engine({ defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine", "hbs");
 app.use(express.static('public'))
+app.use(bodyParser.urlencoded({extended: true}))
 // routes
 app.get('/', (req, res, next) => {
   Record.find()
@@ -31,8 +33,15 @@ app.get('/', (req, res, next) => {
     .catch((error)=>console.log(error))
   
 })
-app.get('/new', (req, res, next)=>{
+app.get('/records/new', (req, res, next)=>{
   res.render('new')
+})
+app.post('/records', (req, res, next)=>{
+  const contents = req.body
+  const newRecord = new Record({...contents})
+  newRecord.save()
+  .then(()=>res.redirect('/'))
+  .catch((error)=>{console.log(error)})
 })
 app.get("/edit", (req, res, next) => {
   res.render("edit");
