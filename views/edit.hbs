@@ -13,27 +13,29 @@
                           <h2 class="fw-bold my-3 text-uppercase" style="font-family: huninn;">請修改支出</h2>
                         </div>
                       </div>
-                      <form action="POST">
+                      <form action="/records/{{record._id}}/edit">
                         <div class="form-outline form-white mb-4 d-flex">
                           <div class="col-3 d-flex align-items-center"><label class="form-label fs-4 fw-bold" for="itemName">名稱*：</label></div>
-                          <div class="col-9"><input type="text" id="itemName" name="itemName" class="form-control form-control-lg" /></div>
+                          <div class="col-9"><input type="text" id="itemName" name="itemName" class="form-control form-control-lg" value="{{record.itemName}}" /></div>
                       </div>
                       <div class="form-outline form-white mb-4 d-flex">
                         <div class="col-3 d-flex align-items-center"> <label class="form-label fs-4 fw-bold" for="date">日期*：</label></div>
-                        <div class="col-9"><input type="date" id="date" name="date" class="form-control form-control-lg" /></div>
+                        <div class="col-9"><input type="date" id="date" name="date" class="form-control form-control-lg" value="{{record.date}}"/></div>
                       </div>
                       <div class="form-outline form-white mb-4 d-flex">
                         <div class="col-3 d-flex align-items-center"> <label class="form-label fs-4 fw-bold" for="category">類別*：</label></div>
-                        <div class="col-9"><input type="text" id="category" name="category" class="form-control form-control-lg" /></div>
+                        <div class="col-9"><input type="text" id="category" name="category" class="form-control form-control-lg" value="{{record.category}}"/></div>
                       </div>
                       <div class="form-outline form-white mb-4 d-flex">
                         <div class="col-3 d-flex align-items-center"> <label class="form-label fs-4 fw-bold" for="amount">金額*：</label></div>
-                        <div class="col-9"><input type="number" id="amount" name="amount" class="form-control form-control-lg" /></div>
+                        <div class="col-9"><input type="number" id="amount" name="amount" class="form-control form-control-lg" value="{{record.amount}}" /></div>
                       </div>
                       <div class="col text-center">
                         <button class="btn btn-outline-info col-sm-3 fs-5" type="submit" style="font-family: huninn;">送出</button>
+                        
                       </div>
-                      </form> 
+                      </form>
+                       <div class="col text-center my-3"><a href="/"><button class="btn btn-outline-secondary col-sm-3 fs-5" style="font-family: huninn;">取消</button></a></div>
                     </div>
                   </div>
                 </div>
