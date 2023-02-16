@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
-
+const Record = require('./models/Record')
 mongoose.connect(process.env.MONGODB_URI)
 
 // 取得資料庫連線狀態
@@ -25,7 +25,11 @@ app.set("view engine", "hbs");
 app.use(express.static('public'))
 // routes
 app.get('/', (req, res, next) => {
-  res.render('index')
+  Record.find()
+    .lean()
+    .then((records) => res.render("index", {records}))
+    .catch((error)=>console.log(error))
+  
 })
 app.listen(port, () => {
   console.log(`App is runnung on http://localhost:${port}`)

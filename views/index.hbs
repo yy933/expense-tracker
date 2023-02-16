@@ -25,22 +25,24 @@
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <th scope="col">Icon</th>
+          <th scope="col">Category</th>
           <th scope="col">Item</th>
           <th scope="col">Amount</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
+        {{#each records}}
         <tr>
-          <th scope="row"><span style="color: rgb(88, 160, 180);"><i class="fa-solid fa-house fa-lg"></i></span></th>
-          <td class="text-wrap">Dinner</td>
-          <td>200</td>
+          <th scope="row"><span style="color: rgb(88, 160, 180);"><i class="{{this.category}}"></i></span></th>
+          <td class="text-wrap">{{this.name}}</td>
+          <td>{{this.amount}}</td>
           <td>
             <button class="btn btn-outline-info btn-sm edit-btn mx-2"><span style="color: rgb(88, 160, 180);"><i class="fa-solid fa-pen"></i></span></button>
             <button class="btn btn-outline-info btn-sm delete-btn"><span style="color: rgb(88, 160, 180);"><i class="fa-solid fa-trash"></i></span></button>
           </td>
         </tr>
+        {{/each}}
       </tbody>
 </table>
   </div>
