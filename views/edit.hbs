@@ -32,9 +32,12 @@
                         </div>
                         <div class="col text-center">
                           <button class="btn btn-outline-info col-sm-3 fs-5" type="submit">送出</button>
-                          <a href="/"><button class="btn btn-outline-secondary col-sm-3 fs-5" type="button">取消</button></a>
                         </div>
                       </form>
+                      <div class="col text-center my-4"> 
+                        <a href="/"><button class="btn btn-outline-secondary col-sm-3 fs-5" type="button">取消</button></a>
+                        <form action="/records/{{record._id}}/delete" method="POST" style="display: inline;" class="mx-2"><button class="btn btn-outline-danger col-sm-3 fs-5" type="submit">刪除</button></form>
+                      </div>
                     </div>
                   </div>
                 </div>
