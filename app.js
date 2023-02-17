@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
+const methodOverride = require('method-override')
 const mongoose = require('mongoose')
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -26,6 +27,7 @@ app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 // routes
 app.get('/', (req, res, next) => {
   Record.find()
@@ -53,7 +55,7 @@ app.get('/records/:id/edit', (req, res, next) => {
       console.log(error)
     })
 })
-app.post('/records/:id/edit', (req, res, next) => {
+app.put('/records/:id', (req, res, next) => {
   const id = req.params.id
   const contents = req.body
   return Record.findByIdAndUpdate(id, contents, { new: true })
@@ -62,7 +64,7 @@ app.post('/records/:id/edit', (req, res, next) => {
       console.log(error)
     })
 })
-app.post('/records/:id/delete', (req, res, next) => {
+app.delete('/records/:id', (req, res, next) => {
   const id = req.params.id
   return Record.findByIdAndRemove(id)
   .then(() => res.redirect('/'))
