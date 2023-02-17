@@ -13,7 +13,7 @@
                           <h2 class="fw-bold my-3 text-uppercase" style="font-family: huninn;">請修改支出</h2>
                         </div>
                       </div>
-                      <form action="/records/{{record._id}}/edit">
+                      <form action="/records/{{record._id}}/edit" method="POST">
                         <div class="form-outline form-white mb-4 d-flex">
                           <div class="col-3 d-flex align-items-center"><label class="form-label fs-4 fw-bold" for="itemName">名稱*：</label></div>
                           <div class="col-9"><input type="text" id="itemName" name="itemName" class="form-control form-control-lg" value="{{record.itemName}}" /></div>
