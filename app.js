@@ -30,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/', (req, res, next) => {
   Record.find()
     .lean()
+    .sort({date: 'desc'})
     .then((records) => res.render('index', { records }))
     .catch((error) => console.log(error))
 })
