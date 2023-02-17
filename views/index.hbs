@@ -39,7 +39,7 @@
           <td>{{this.amount}}</td>
           <td>
             <a href="./records/{{this._id}}/edit"><button class="btn btn-outline-info btn-sm edit-btn mx-2"><span style="color: rgb(88, 160, 180);"><i class="fa-solid fa-pen"></i></span></button></a>
-            <button class="btn btn-outline-info btn-sm delete-btn"><span style="color: rgb(88, 160, 180);"><i class="fa-solid fa-trash"></i></span></button>
+            <form action="./records/{{this._id}}/delete" method="POST" style="display:inline;"><button class="btn btn-outline-info btn-sm delete-btn" type="submit"><span style="color: rgb(88, 160, 180);"><i class="fa-solid fa-trash"></i></span></button></form>
           </td>
         </tr>
         {{/each}}
