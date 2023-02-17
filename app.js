@@ -45,15 +45,22 @@ app.post('/records', (req, res, next)=>{
 })
 app.get("/records/:id/edit", (req, res, next) => {
   const id = req.params.id
-  const contents = req.body
   return Record.findById(id)
     .lean()
     .then((record) => res.render("edit", {record}))
     .catch((error) => {
       console.log(error);
     });
-  
 });
+app.post('/records/:id/edit', (req, res, next)=>{
+  const id = req.params.id
+  const contents = req.body
+  return Record.findByIdAndUpdate(id, contents, {new: true})
+    .then(()=>res.redirect('/'))
+    .catch((error) => {
+      console.log(error);
+    });
+})
 app.get("/register", (req, res, next) => {
   res.render("register");
 });
