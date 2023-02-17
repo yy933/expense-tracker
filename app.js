@@ -3,25 +3,9 @@ const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
-const mongoose = require('mongoose')
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
-mongoose.set('strictQuery', false)
 const bodyParser = require('body-parser')
 const routes = require('./routes')
-mongoose.connect(process.env.MONGODB_URI)
-
-// 取得資料庫連線狀態
-const db = mongoose.connection
-// 連線異常
-db.on('error', () => {
-  console.log('mongodb error!')
-})
-// 連線成功
-db.once('open', () => {
-  console.log('mongodb connected!')
-})
+require('./config/mongoose')
 
 app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
