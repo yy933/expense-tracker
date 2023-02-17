@@ -34,7 +34,7 @@ app.get('/', (req, res, next) => {
   
 })
 app.get('/records/new', (req, res, next)=>{
-  res.render('new')
+  return res.render('new')
 })
 app.post('/records', (req, res, next)=>{
   const contents = req.body
