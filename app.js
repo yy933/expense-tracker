@@ -8,6 +8,9 @@ const flash = require('connect-flash')
 const bodyParser = require('body-parser')
 const routes = require('./routes')
 const usePassport = require('./config/passport')
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 require('./config/mongoose')
 
 app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
