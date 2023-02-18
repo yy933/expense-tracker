@@ -3,7 +3,8 @@ const router = express.Router()
 const Record = require('../../models/Record')
 
 router.get('/', (req, res, next) => {
-  Record.find()
+  const userId = req.user._id
+  Record.find({userId})
     .lean()
     .sort({ date: 'desc' })
     .then((records) => res.render('index', { records }))

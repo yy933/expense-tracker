@@ -19,12 +19,12 @@ const recordSchema = new Schema({
     min: [1, '至少1元'],
     required: true
   },
-  // userId: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: "Users",
-  //   index: true,
-  //   required: true,
-  // },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "Users",
+    index: true,
+    required: true,
+  },
   // categoryId: {
   //   type: Schema.Types.ObjectId,
   //   ref: 'Category',
