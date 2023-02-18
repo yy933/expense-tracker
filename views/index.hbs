@@ -1,24 +1,24 @@
 <div class="container-sm">
   <div class="row d-flex justify-content-center my-4">
-    <div class="col text-center ">
-      <div class="btn-group col-sm-3" role="group" aria-label="Button group with nested dropdown">
-        <button type="button" class="btn btn-info">選擇類別</button>
-        <div class="btn-group" role="group">
-          <button id="btnGroupDrop3" type="button" class="btn btn-info dropdown-toggle show" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></button>
-          <div class="dropdown-menu show" aria-labelledby="btnGroupDrop3" data-popper-placement="bottom-start" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 42px, 0px);">
-            <a class="dropdown-item" href="#">家居</a>
-            <a class="dropdown-item" href="#">交通</a>
-            <a class="dropdown-item" href="#">休閒娛樂</a>
-            <a class="dropdown-item" href="#">餐飲</a>
-            <a class="dropdown-item" href="#">其他</a>
-          </div>
-        </div>
-      </div>
+    <div class="col-6 col-m-5 col-lg-4 text-center ">
+      
+      <form action="/sortByCategory" method="get" class="form-group">
+          <label for="sortCategory" class="form-label mt-4"></label>
+          <select class="form-select" id="sortCategory" name="sortCategory" onchange='this.form.submit()'>
+            <option selected>請選擇類別</option>
+              <option value="" >家居</option>
+              <option value="" >交通</option>
+              <option value="">休閒娛樂</option>
+              <option value="">餐飲</option>
+              <option value="">其他</option>
+          </select>
+        </form>
+      
     </div>
   </div>
   <div class="row d-flex my-4">
     <div class="col col-sm-12 text-center">
-      <span class="fs-5 text-muted align-top mx-2">總金額:</span>
+      <span class="fs-5 text-muted align-top mx-2" id="totalAmount">總金額:</span>
       <span class="fw-bold mx-3 totalAmount" style="color: rgb(88, 160, 180); font-size:3.8rem">3000</span>
     </div>
   </div>
