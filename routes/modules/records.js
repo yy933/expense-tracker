@@ -7,7 +7,8 @@ router.get('/new', (req, res, next) => {
 })
 router.post('/', (req, res, next) => {
   const contents = req.body
-  const newRecord = new Record({ ...contents })
+  const categoryId = req.category._id
+  const newRecord = new Record({ ...contents, categoryId })
   newRecord
     .save()
     .then(() => res.redirect('/'))
