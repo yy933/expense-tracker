@@ -6,10 +6,26 @@ router.get('/new', (req, res, next) => {
   return res.render('new')
 })
 router.post('/', (req, res, next) => {
-  const contents = req.body
+  const {itemName, amount, category, date} = req.body
   // const categoryId = req.category._id
   const userId = req.user._id;
-  const newRecord = new Record({ ...contents, userId })
+  const newRecord = new Record({ itemName, amount, category, date, userId })
+  const errors = [];
+  if (!itemName || !amount || !category || !date) {
+    errors.push({ message: "所有欄位都是必填。" });
+  }
+  if ( amount <= 0 ) {
+    errors.push({ message: "金額必須至少為1元" });
+  }
+  if (errors.length) {
+    return res.render("new", {
+      errors,
+      itemName,
+      amount,
+      date,
+      category
+    });
+  }
   newRecord
     .save()
     .then(() => res.redirect('/'))
