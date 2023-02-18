@@ -1,20 +1,13 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const recordSchema = new Schema({
-  // id:{
-  //   type: Number,
-  //   required: true,
-  // },
   category: {
     type: String,
     required: true
   },
-  // userID:{
-  //   type: Number,
-  //   required: true,
-  // },
   itemName: {
     type: String,
+    trim: true,
     required: true
   },
   date: {
@@ -23,6 +16,19 @@ const recordSchema = new Schema({
   },
   amount: {
     type: Number,
+    min: [1, '至少1元'],
+    required: true
+  },
+  // userId: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "Users",
+  //   index: true,
+  //   required: true,
+  // },
+  categoryId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Category',
+    index: true,
     required: true
   }
 })

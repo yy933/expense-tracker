@@ -24,7 +24,16 @@
                       </div>
                       <div class="form-outline form-white mb-4 d-flex">
                         <div class="col-3 d-flex align-items-center"> <label class="form-label fs-4 fw-bold" for="category">類別*：</label></div>
-                        <div class="col-9"><input type="text" id="category" name="category" class="form-control form-control-lg" /></div>
+                        <div class="col-9">
+                          <select name="category" id="category" class="form-select form-select-lg">
+                            <option value="" disabled selected>請選擇</option>
+                            <option value="家居">家居</option>
+                            <option value="交通">交通</option>
+                            <option value="休閒娛樂">休閒娛樂</option>
+                            <option value="餐飲">餐飲</option>
+                            <option value="其他">其他</option>
+                          </select>
+                        </div>
                       </div>
                       <div class="form-outline form-white mb-4 d-flex">
                         <div class="col-3 d-flex align-items-center"> <label class="form-label fs-4 fw-bold" for="amount">金額*：</label></div>
