@@ -8,7 +8,8 @@ router.get('/new', (req, res, next) => {
 router.post('/', (req, res, next) => {
   const contents = req.body
   // const categoryId = req.category._id
-  const newRecord = new Record({ ...contents })
+  const userId = req.user._id;
+  const newRecord = new Record({ ...contents, userId })
   newRecord
     .save()
     .then(() => res.redirect('/'))
@@ -17,8 +18,9 @@ router.post('/', (req, res, next) => {
     })
 })
 router.get('/:id/edit', (req, res, next) => {
-  const id = req.params.id
-  return Record.findById(id)
+  const _id = req.params.id
+  const userId = req.user._id
+  return Record.findOne({_id, userId})
     .lean()
     .then((record) => res.render('edit', { record }))
     .catch((error) => {
@@ -26,17 +28,19 @@ router.get('/:id/edit', (req, res, next) => {
     })
 })
 router.put('/:id', (req, res, next) => {
-  const id = req.params.id
+  const _id = req.params.id
+  const userId = req.user._id
   const contents = req.body
-  return Record.findByIdAndUpdate(id, contents, { new: true })
+  return Record.findOneAndUpdate({_id, userId}, contents, { new: true })
     .then(() => res.redirect('/'))
     .catch((error) => {
       console.log(error)
     })
 })
 router.delete('/:id', (req, res, next) => {
-  const id = req.params.id
-  return Record.findByIdAndRemove(id)
+  const _id = req.params.id
+  const userId = req.user._id
+  return Record.findOneAndRemove({_id, userId})
     .then(() => res.redirect('/'))
     .catch((error) => {
       console.log(error)
