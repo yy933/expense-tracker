@@ -6,6 +6,7 @@ const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 const routes = require('./routes')
+const usePassport = require('./config/passport')
 require('./config/mongoose')
 
 app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
@@ -18,9 +19,10 @@ app.use(session({
 }))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+usePassport(app)
 app.use(routes)
-// routes
 
+// routes
 app.get('/register', (req, res, next) => {
   res.render('register')
 })
