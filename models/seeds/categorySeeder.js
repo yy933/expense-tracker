@@ -1,4 +1,3 @@
-const mongoose = require('mongoose')
 const Category = require('../Category')
 const CATEGORY = {
   家居: 'https://fontawesome.com/icons/home?style=solid',
@@ -7,17 +6,8 @@ const CATEGORY = {
   餐飲: 'https://fontawesome.com/icons/utensils?style=solid',
   其他: 'https://fontawesome.com/icons/pen?style=solid'
 }
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-const db = mongoose.connection
-db.on('error', () => {
-  console.log('mongodb error!')
-})
+const db = require("../../config/mongoose");
+
 db.once('open', () => {
   console.log('mongodb connected!')
   const categoryKeyArray = Object.keys(CATEGORY)
