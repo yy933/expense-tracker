@@ -17,9 +17,8 @@ router.get('/', (req, res, next) => {
           records.forEach(record => {
             totalAmount += record.amount
           })
-          return res.render("index", { records, categories, totalAmount });
+          return res.render('index', { records, categories, totalAmount })
         })
-        
     })
     .catch(error => console.log(error))
 })
@@ -27,7 +26,7 @@ router.get('/', (req, res, next) => {
 router.get('/search', (req, res) => {
   const userId = req.user._id
   const categoryId = req.query.categoryId
-  if (!categoryId){
+  if (!categoryId) {
     return res.redirect('/')
   }
   console.log(categoryId)
