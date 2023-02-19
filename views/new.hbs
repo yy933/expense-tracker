@@ -27,7 +27,7 @@
                         <div class="col-3 d-flex align-items-center"> <label class="form-label fs-4 fw-bold" for="categoryId">類別*：</label></div>
                         <div class="col-9">
                           <select name="categoryId" id="categoryId" class="form-select form-select-lg">
-                          {{#each catagories}}
+                          {{#each categories}}
                           <option value="{{ this._id }}" {{#if this.selected}} selected {{/if}}>{{ this.name }}</option>
                           {{/each}}
                           </select>

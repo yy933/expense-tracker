@@ -8,10 +8,6 @@ const categorySchema = new Schema({
   url: {
     type: String,
     required: true
-  },
-  records: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Record'
-  }]
+  }
 })
 module.exports = mongoose.model('Category', categorySchema)
