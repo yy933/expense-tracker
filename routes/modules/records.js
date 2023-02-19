@@ -1,13 +1,18 @@
 const express = require('express')
 const router = express.Router()
 const Record = require('../../models/Record')
+const Category = require('../../models/Category')
 
 router.get('/new', (req, res, next) => {
-  return res.render('new')
+  Category.find()
+  .lean()
+  .then(categories => {
+     return res.render("new", {categories});
+  })
+ 
 })
 router.post('/', (req, res, next) => {
   const {itemName, amount, categoryId, date} = req.body
-  
   const userId = req.user._id;
   const newRecord = new Record({ itemName, amount, categoryId, date, userId })
   const errors = [];
