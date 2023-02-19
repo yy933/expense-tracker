@@ -31,7 +31,6 @@ router.get('/search', (req, res) => {
   if (!categoryId) {
     return res.redirect('/')
   }
-  console.log(categoryId)
   Category.find()
     .lean()
     .then(categories => {
@@ -50,6 +49,7 @@ router.get('/search', (req, res) => {
           let totalAmount = 0
           records.forEach(record => {
             totalAmount += record.amount
+            record.date = moment(record.date).format("YYYY/MM/DD");
           })
           return res.render('index', { records, categories, totalAmount })
         })
