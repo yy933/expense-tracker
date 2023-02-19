@@ -11,7 +11,7 @@ router.get('/new', (req, res, next) => {
   })
  
 })
-router.post('/', (req, res, next) => {
+router.post('/new', (req, res, next) => {
   const {itemName, amount, categoryId, date} = req.body
   const userId = req.user._id;
   const newRecord = new Record({ itemName, amount, categoryId, date, userId })

@@ -1,10 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const recordSchema = new Schema({
-  category: {
-    type: String,
-    required: true
-  },
   itemName: {
     type: String,
     trim: true,
