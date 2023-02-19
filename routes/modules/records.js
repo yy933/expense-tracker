@@ -6,12 +6,12 @@ router.get('/new', (req, res, next) => {
   return res.render('new')
 })
 router.post('/', (req, res, next) => {
-  const {itemName, amount, category, date} = req.body
-  // const categoryId = req.category._id
+  const {itemName, amount, categoryId, date} = req.body
+  
   const userId = req.user._id;
-  const newRecord = new Record({ itemName, amount, category, date, userId })
+  const newRecord = new Record({ itemName, amount, categoryId, date, userId })
   const errors = [];
-  if (!itemName || !amount || !category || !date) {
+  if (!itemName || !amount || !categoryId || !date) {
     errors.push({ message: "所有欄位都是必填。" });
   }
   if ( amount <= 0 ) {
@@ -23,7 +23,7 @@ router.post('/', (req, res, next) => {
       itemName,
       amount,
       date,
-      category
+      categoryId
     });
   }
   newRecord
