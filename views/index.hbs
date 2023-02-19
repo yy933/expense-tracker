@@ -2,15 +2,12 @@
   <div class="row d-flex justify-content-center my-4">
     <div class="col-6 col-m-5 col-lg-4 text-center ">
       
-      <form action="/sortByCategory" method="get" class="form-group">
-          <label for="sortCategory" class="form-label mt-4"></label>
-          <select class="form-select" id="sortCategory" name="sortCategory" onchange='this.form.submit()'>
-            <option selected>請選擇類別</option>
-              <option value="" >家居</option>
-              <option value="" >交通</option>
-              <option value="">休閒娛樂</option>
-              <option value="">餐飲</option>
-              <option value="">其他</option>
+      <form action="/search" method="GET" class="form-group">
+          <label for="categoryId" class="form-label mt-4"></label>
+          <select class="form-select" id="categoryId" name="categoryId" onchange='this.form.submit()'>
+            <option value="" disabled selected>請選擇類別</option>
+           {{#each categories}}
+            <option value="{{this._id}}" {{#if this.selected}} selected {{/if}}>{{this.name}}</option>{{/each}}
           </select>
         </form>
       
