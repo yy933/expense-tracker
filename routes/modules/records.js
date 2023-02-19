@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Record = require('../../models/Record')
+const Record = require('../../models/record')
 const Category = require('../../models/Category')
 
 router.get('/new', (req, res, next) => {

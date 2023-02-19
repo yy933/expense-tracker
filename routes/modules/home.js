@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const moment = require('moment')
-const Record = require('../../models/Record')
+const Record = require('../../models/record')
 const Category = require('../../models/Category')
 // 首頁
 router.get('/', (req, res, next) => {
