@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const moment = require('moment')
 const Record = require('../../models/Record')
 const Category = require('../../models/Category')
 
@@ -11,32 +12,51 @@ router.get('/new', (req, res, next) => {
     })
 })
 router.post('/new', (req, res, next) => {
-  const { itemName, amount, categoryId, date } = req.body
-  const userId = req.user._id
-  const newRecord = new Record({ itemName, amount, categoryId, date, userId })
-  const errors = []
-  if (!itemName || !amount || !categoryId || !date) {
-    errors.push({ message: '所有欄位都是必填。' })
-  }
-  if (amount <= 0) {
-    errors.push({ message: '金額必須至少為1元' })
-  }
-  if (errors.length) {
-    return res.render('new', {
-      errors,
-      itemName,
-      amount,
-      date,
-      categoryId
+  Category.find()
+    .lean()
+    .then(categories => {
+      const { itemName, amount, categoryId, date } = req.body
+      const userId = req.user._id
+      const newRecord = new Record({
+        itemName,
+        amount,
+        categoryId,
+        date,
+        userId
+      })
+      const errors = []
+      categories.forEach((category) => {
+        if (String(category._id) === categoryId) {
+          category.selected = true
+        } else {
+          category.selected = false
+        }
+      })
+      if (!itemName || !amount || !categoryId || !date) {
+        errors.push({ message: '所有欄位都是必填。' })
+      }
+      if (amount <= 0) {
+        errors.push({ message: '金額必須至少為1元' })
+      }
+      if (errors.length) {
+        return res.render('new', {
+          errors,
+          itemName,
+          amount,
+          date,
+          categories
+        })
+      }
+      return newRecord
+        .save()
+        .then(() => res.redirect('/'))
+        .catch((error) => {
+          console.log(error)
+        })
     })
-  }
-  newRecord
-    .save()
-    .then(() => res.redirect('/'))
-    .catch((error) => {
-      console.log(error)
-    })
+    .catch(error => console.log(error))
 })
+
 router.get('/:id/edit', (req, res, next) => {
   const _id = req.params.id
   const userId = req.user._id
@@ -87,11 +107,11 @@ router.put('/:id', (req, res, next) => {
           })
           .catch(error => console.log(error))
       }
-      return Record.findOneAndUpdate(
-        { _id, userId },
+      return Record.findOneAndUpdate({ _id, userId },
         { itemName, date, categoryId, amount, userId },
-        { new: true }
-      ).then(() => res.redirect('/')).catch(error => console.log(error))
+        { new: true })
+        .then(() => res.redirect('/'))
+        .catch(error => console.log(error))
     })
     .catch((error) => console.log(error))
 })
