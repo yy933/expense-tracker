@@ -40,11 +40,22 @@ router.post('/new', (req, res, next) => {
 router.get('/:id/edit', (req, res, next) => {
   const _id = req.params.id
   const userId = req.user._id
-  return Record.findOne({ _id, userId })
+  Category.find()
     .lean()
-    .then((record) => res.render('edit', { record }))
-    .catch((error) => {
-      console.log(error)
+    .then((categories) => {
+      Record.findOne({ _id, userId })
+        .lean()
+        .then(record => {
+          categories.forEach((category) => {
+            if (String(category._id) === String(record.categoryId)) {
+              category.selected = true
+            } else {
+              category.selected = false
+            }
+          })
+          return res.render('edit', { record, categories })
+        })
+        .catch((error) => console.log(error))
     })
 })
 router.put('/:id', (req, res, next) => {
@@ -52,10 +63,9 @@ router.put('/:id', (req, res, next) => {
   const userId = req.user._id
   const contents = req.body
   return Record.findOneAndUpdate({ _id, userId }, contents, { new: true })
+
     .then(() => res.redirect('/'))
-    .catch((error) => {
-      console.log(error)
-    })
+    .catch((error) => console.log(error))
 })
 router.delete('/:id', (req, res, next) => {
   const _id = req.params.id
