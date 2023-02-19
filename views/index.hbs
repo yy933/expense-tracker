@@ -23,21 +23,23 @@
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <th scope="col">Category</th>
-          <th scope="col">Item</th>
-          <th scope="col">Amount</th>
-          <th scope="col">Action</th>
+          <th scope="col" class=" fs-5 fw-bold text-center">類別</th>
+          <th scope="col" class=" fs-5 fw-bold text-center">日期</th>
+          <th scope="col" class=" fs-5 fw-bold text-center">名稱</th>
+          <th scope="col" class=" fs-5 fw-bold text-center">金額</th>
+          <th scope="col" class=" fs-5 fw-bold text-center">修改/刪除</th>
         </tr>
       </thead>
       <tbody>
         {{#each records}}
         <tr>
-          <th scope="row"><span style="color: rgb(88, 160, 180);" >{{{this.categoryId.url}}}</span></th>
-          <td class="text-wrap">{{this.itemName}}</td>
-          <td>{{this.amount}}</td>
-          <td>
-            <a href="./records/{{this._id}}/edit"><button class="btn btn-outline-info btn-sm edit-btn mx-2"><span style="color: rgb(88, 160, 180);"><i class="fa-solid fa-pen"></i></span></button></a>
-            <form action="./records/{{this._id}}?_method=DELETE" method="POST" style="display:inline;"><button class="btn btn-outline-info btn-sm delete-btn" type="submit"><span style="color: rgb(88, 160, 180);"><i class="fa-solid fa-trash"></i></span></button></form>
+          <th scope="row" class="text-center fs-4"><span style="color: rgb(88, 160, 180);" >{{{this.categoryId.url}}}</span></th>
+           <td class="text-wrap text-center fs-6">{{this.date}}</td>
+          <td class="text-wrap text-center fs-6">{{this.itemName}}</td>
+          <td class="text-wrap text-center fs-6">{{this.amount}}</td>
+          <td class="text-center">
+            <a href="./records/{{this._id}}/edit"><button class="btn btn-outline-info btn-sm edit-btn mx-2 fs-6 "><span style="color: rgb(88, 160, 180);"><i class="fa-solid fa-pen"></i></span></button></a>
+            <form action="./records/{{this._id}}?_method=DELETE" method="POST" style="display:inline;"><button class="btn btn-outline-info btn-sm delete-btn fs-6" type="submit"><span style="color: rgb(88, 160, 180);"><i class="fa-solid fa-trash"></i></span></button></form>
           </td>
         </tr>
         {{/each}}
