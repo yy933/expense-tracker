@@ -3,9 +3,9 @@
     <div class="col-6 col-m-5 col-lg-4 text-center ">
       
       <form action="/search" method="GET" class="form-group">
-          <label for="categoryId" class="form-label mt-4"></label>
+          <label for="categoryId" class="form-label mt-4">請選擇類別</label>
           <select class="form-select" id="categoryId" name="categoryId" onchange='this.form.submit()'>
-            <option disabled selected>請選擇類別</option>
+           <option value="">所有類別</option>
            {{#each categories}}
             <option value="{{this._id}}" {{#if this.selected}} selected {{/if}}>{{this.name}}</option>{{/each}}
           </select>
