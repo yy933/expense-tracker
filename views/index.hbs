@@ -1,22 +1,24 @@
 <div class="container-sm">
   <div class="row d-flex justify-content-center my-4">
     <div class="col-6 col-m-5 col-lg-4 text-center ">
-      
-      <form action="/search" method="GET" class="form-group">
-          <label for="categoryId" class="form-label mt-4">請選擇類別</label>
-          <select class="form-select" id="categoryId" name="categoryId" onchange='this.form.submit()'>
-           <option value="">所有類別</option>
-           {{#each categories}}
-            <option value="{{this._id}}" {{#if this.selected}} selected {{/if}}>{{this.name}}</option>{{/each}}
-          </select>
-        </form>
-      
+
+      <form action="/sort" method="GET" class="form-group">
+        <label for="categoryId" class="form-label mt-4">請選擇類別</label>
+        <select class="form-select" id="categoryId" name="categoryId"
+          onchange='this.form.submit()'>
+          <option value>所有類別</option>
+          {{#each categories}}
+          <option value="{{this._id}}" {{#if this.selected}} selected {{/if}}>{{this.name}}</option>{{/each}}
+        </select>
+      </form>
+
     </div>
   </div>
   <div class="row d-flex my-4">
     <div class="col col-sm-12 text-center">
       <span class="fs-5 text-muted align-top mx-2" id="totalAmount">總金額:</span>
-      <span class="fw-bold mx-3 totalAmount" style="color: rgb(88, 160, 180); font-size:3.8rem">{{totalAmount}}</span>
+      <span class="fw-bold mx-3 totalAmount"
+        style="color: rgb(88, 160, 180); font-size:3.8rem">{{totalAmount}}</span>
     </div>
   </div>
   <div class="row d-flex justify-content-center px-1 my-4">
@@ -33,22 +35,30 @@
       <tbody>
         {{#each records}}
         <tr>
-          <th scope="row" class="text-center fs-4"><span style="color: rgb(88, 160, 180);" >{{{this.categoryId.url}}}</span></th>
-           <td class="text-wrap text-center fs-6">{{this.date}}</td>
+          <th scope="row" class="text-center fs-4"><span
+              style="color: rgb(88, 160, 180);">{{{this.categoryId.url}}}</span></th>
+          <td class="text-wrap text-center fs-6">{{this.date}}</td>
           <td class="text-wrap text-center fs-6">{{this.itemName}}</td>
           <td class="text-wrap text-center fs-6">{{this.amount}}</td>
           <td class="text-center">
-            <a href="./records/{{this._id}}/edit"><button class="btn btn-outline-info btn-sm edit-btn mx-2 fs-6 "><span style="color: rgb(88, 160, 180);"><i class="fa-solid fa-pen"></i></span></button></a>
-            <form action="./records/{{this._id}}?_method=DELETE" method="POST" style="display:inline;"><button class="btn btn-outline-info btn-sm delete-btn fs-6" type="submit"><span style="color: rgb(88, 160, 180);"><i class="fa-solid fa-trash"></i></span></button></form>
+            <a href="./records/{{this._id}}/edit"><button
+                class="btn btn-outline-info btn-sm edit-btn mx-2 fs-6 "><span
+                  style="color: rgb(88, 160, 180);"><i class="fa-solid fa-pen"></i></span></button></a>
+            <form action="./records/{{this._id}}?_method=DELETE" method="POST"
+              style="display:inline;"><button
+                class="btn btn-outline-info btn-sm delete-btn fs-6"
+                type="submit"><span style="color: rgb(88, 160, 180);"><i
+                    class="fa-solid fa-trash"></i></span></button></form>
           </td>
         </tr>
         {{/each}}
       </tbody>
-</table>
+    </table>
   </div>
   <div class="row d-flex justify-content-center my-4">
     <div class="col text-center">
-      <a href="/records/new"><button class="btn btn-outline-info col-sm-3" style="font-family: huninn;">新增支出</button></a>
+      <a href="/records/new"><button class="btn btn-outline-info col-sm-3"
+          style="font-family: huninn;">新增支出</button></a>
     </div>
   </div>
 </div>

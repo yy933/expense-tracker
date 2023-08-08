@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs')
-const Users = require('../../models/Users')
+const Users = require('../models/Users')
 
 const userController = {
   getLogin: (req, res, next) => {
