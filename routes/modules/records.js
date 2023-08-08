@@ -1,7 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const Record = require('../../models/record')
+const Record = require('../../models/Record')
 const Category = require('../../models/Category')
+const recordController = require('../../controllers/recordController')
 
 router.get('/new', (req, res, next) => {
   Category.find()
