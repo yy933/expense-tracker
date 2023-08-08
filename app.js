@@ -3,15 +3,16 @@ const session = require('express-session')
 const app = express()
 const port = process.env.PORT || 3000
 const exphbs = require('express-handlebars')
-const methodOverride = require('method-override')
-const flash = require('connect-flash')
-const bodyParser = require('body-parser')
-const routes = require('./routes')
-const usePassport = require('./config/passport')
+
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 require('./config/mongoose')
+const passport = require('./config/passport')
+const methodOverride = require('method-override')
+const flash = require('connect-flash')
+const bodyParser = require('body-parser')
+const routes = require('./routes')
 
 app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
@@ -22,8 +23,10 @@ app.use(session({
   saveUninitialized: true
 }))
 app.use(bodyParser.urlencoded({ extended: true }))
+// 初始化 Passport 模組
+app.use(passport.initialize())
+app.use(passport.session())
 app.use(methodOverride('_method'))
-usePassport(app)
 app.use(flash())
 app.use((req, res, next) => {
   console.log(req.user)
@@ -36,5 +39,5 @@ app.use((req, res, next) => {
 app.use(routes)
 
 app.listen(port, () => {
-  console.log(`App is runnung on http://localhost:${port}`)
+  console.log(`App is running on http://localhost:${port}`)
 })
