@@ -25,18 +25,17 @@ const homeController = {
   },
   getSort: (req, res, next) => {
     const userId = req.user._id
-    const categoryId = req.query.categoryId
+    const { categoryId, startDate, endDate, orderBy } = req.query
     if (!categoryId) {
       return res.redirect('/')
     }
+    console.log(req.query)
     Category.find()
       .lean()
       .then(categories => {
         categories.forEach(category => {
           if (String(category._id) === categoryId) {
             category.selected = true
-          } else {
-            category.selected = false
           }
         })
         Record.find({ userId, categoryId })
