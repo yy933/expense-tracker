@@ -23,10 +23,10 @@
         {{!-- Order by  --}}
         <label for="orderBy" class="form-label fs-4 fw-bold mt-2">排序方式</label>
         <select class="form-select" id="orderBy" name="orderBy">
-          <option value="date-desc" {{#if selected}} selected {{/if}}>日期：近->遠</option>
-          <option value="date-asc" {{#if selected}} selected {{/if}}>日期：遠->近</option>
-          <option value="amount-desc" {{#if selected}} selected {{/if}}>金額：高->低</option>
-          <option value="amount-asc" {{#if selected}} selected {{/if}}>金額：低->高</option>
+          <option value="date-desc" {{#ifCond orderBy 'date-desc'}} selected {{/ifCond}}>日期：近->遠</option>
+          <option value="date-asc" {{#ifCond orderBy 'date-asc'}} selected {{/ifCond}}>日期：遠->近</option>
+          <option value="amount-desc" {{#ifCond orderBy 'amount-desc'}} selected {{/ifCond}}>金額：高->低</option>
+          <option value="amount-asc" {{#ifCond orderBy 'amount-asc'}} selected {{/ifCond}}>金額：低->高</option>
         </select>
         {{!-- submit button  --}}
           <button class="btn btn-warning mt-3 w-50" type="submit">篩選</button>

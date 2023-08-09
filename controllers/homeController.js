@@ -29,6 +29,17 @@ const homeController = {
     if (!categoryId) {
       return res.redirect('/')
     }
+    let orderOption
+    if (orderBy === 'date-desc') {
+      orderOption = { date: 'desc' }
+    } else if (orderBy === 'date-asc') {
+      orderOption = { date: 'asc' }
+    } else if (orderBy === 'amount-desc') {
+      orderOption = { amount: 'desc' }
+    } else if (orderBy === 'amount-asc') {
+      orderOption = { amount: 'asc' }
+    }
+
     console.log(req.query)
     Category.find()
       .lean()
@@ -38,17 +49,17 @@ const homeController = {
             category.selected = true
           }
         })
-        Record.find({ userId, categoryId })
+        Record.find({ userId, categoryId: categoryId || {} })
           .populate('categoryId')
           .lean()
-          .sort({ _id: 'desc' })
+          .sort(orderOption)
           .then(records => {
             let totalAmount = 0
             records.forEach(record => {
               totalAmount += record.amount
               record.date = moment(record.date).format('YYYY/MM/DD')
             })
-            return res.render('index', { records, categories, totalAmount })
+            return res.render('index', { records, categories, totalAmount, orderBy })
           })
       })
       .catch(error => console.error(error))
