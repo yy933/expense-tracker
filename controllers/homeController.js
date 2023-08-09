@@ -1,6 +1,6 @@
-const moment = require('moment')
 const Record = require('../models/Record')
 const Category = require('../models/Category')
+const moment = require('moment')
 
 const homeController = {
   getHome: (req, res, next) => {

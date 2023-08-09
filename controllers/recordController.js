@@ -1,5 +1,6 @@
 const Record = require('../models/Record')
 const Category = require('../models/Category')
+const moment = require('moment')
 
 const recordController = {
   getAddNewRecord: (req, res, next) => {
@@ -7,6 +8,10 @@ const recordController = {
       .lean()
       .then(categories => {
         return res.render('new', { categories })
+      })
+      .catch(error => {
+        console.log(error)
+        next(error)
       })
   },
   addNewRecord: (req, res, next) => {
@@ -52,33 +57,38 @@ const recordController = {
             console.log(error)
           })
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        console.log(error)
+        next(error)
+      })
   },
   getEditRecord: (req, res, next) => {
     const _id = req.params.id
     const userId = req.user._id
     Category.find()
       .lean()
-      .then((categories) => {
+      .then(categories => {
         Record.findOne({ _id, userId })
           .lean()
           .then(record => {
-            categories.forEach((category) => {
+            categories.forEach(category => {
               if (String(category._id) === String(record.categoryId)) {
                 category.selected = true
-              } else {
-                category.selected = false
               }
             })
+            record.date = moment(record.date).format('YYYY-MM-DD')
             return res.render('edit', { record, categories })
           })
-          .catch((error) => console.log(error))
+          .catch(error => {
+            console.log(error)
+            next(error)
+          })
       })
   },
   editRecord: (req, res, next) => {
     Category.find()
       .lean()
-      .then((categories) => {
+      .then(categories => {
         const _id = req.params.id
         const userId = req.user._id
         const { itemName, date, categoryId, amount } = req.body
@@ -86,8 +96,6 @@ const recordController = {
         categories.forEach(category => {
           if (String(category._id) === categoryId) {
             category.selected = true
-          } else {
-            category.selected = false
           }
         })
         if (!itemName || !amount || !categoryId || !date) {
@@ -100,6 +108,7 @@ const recordController = {
           return Record.findOne({ _id, userId })
             .lean()
             .then(record => {
+              record.date = moment(record.date).format('YYYY-MM-DD')
               res.render('edit', { errors, record, categories })
             })
             .catch(error => console.log(error))
@@ -108,17 +117,24 @@ const recordController = {
           { itemName, date, categoryId, amount, userId },
           { new: true })
           .then(() => res.redirect('/'))
-          .catch(error => console.log(error))
+          .catch(error => {
+            console.log(error)
+            next(error)
+          })
       })
-      .catch((error) => console.log(error))
+      .catch(error => {
+        console.log(error)
+        next(error)
+      })
   },
   deleteRecord: (req, res, next) => {
     const _id = req.params.id
     const userId = req.user._id
     return Record.findOneAndRemove({ _id, userId })
       .then(() => res.redirect('/'))
-      .catch((error) => {
+      .catch(error => {
         console.log(error)
+        next(error)
       })
   }
 
