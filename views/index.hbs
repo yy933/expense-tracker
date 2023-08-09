@@ -5,7 +5,7 @@
         {{!-- sort by category  --}}
         <label for="categoryId" class="form-label mt-4 fs-4 fw-bold">類別</label>
         <select class="form-select" id="categoryId" name="categoryId">
-          <option value="" {{#if selected}} selected {{/if}}>所有類別</option>
+          <option value="all" {{#ifCond categoryId 'all'}} selected {{/ifCond}}>所有類別</option>
           {{#each categories}}
           <option value="{{this._id}}" {{#if this.selected}} selected {{/if}}>{{this.name}}</option>{{/each}}
         </select>
@@ -13,11 +13,11 @@
         <label class="form-label fs-4 fw-bold mt-2" for="startDate">日期</label>
         <div class="d-flex justify-content-center">
           <div class="form-outline form-white me-2">
-            <input type="date" id="startDate" name="startDate" class="form-control" value="">
+            <input type="date" id="startDate" name="startDate" class="form-control" value={{startDate}}>
           </div>
           <span class="fs-2 fw-bold">-</span>
           <div class="form-outline form-white ms-2">
-            <input type="date" id="endDate" name="endDate" class="form-control" value="">
+            <input type="date" id="endDate" name="endDate" class="form-control" value={{endDate}}>
           </div>
         </div>
         {{!-- Order by  --}}
@@ -29,7 +29,7 @@
           <option value="amount-asc" {{#ifCond orderBy 'amount-asc'}} selected {{/ifCond}}>金額：低->高</option>
         </select>
         {{!-- submit button  --}}
-          <button class="btn btn-warning mt-3 w-50" type="submit">篩選</button>
+          <button class="btn btn-dark mt-3 w-50" type="submit">篩選</button>
       </form>
     </div>
   </div>

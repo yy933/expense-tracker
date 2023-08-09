@@ -49,7 +49,11 @@ const homeController = {
             category.selected = true
           }
         })
-        Record.find({ userId, categoryId: categoryId || {} })
+        Record.find({
+          userId,
+          ...(categoryId !== 'all') ? { categoryId } : {},
+          ...(startDate && endDate) ? { date: { $gte: startDate, $lte: endDate } } : {}
+        })
           .populate('categoryId')
           .lean()
           .sort(orderOption)
@@ -59,7 +63,7 @@ const homeController = {
               totalAmount += record.amount
               record.date = moment(record.date).format('YYYY/MM/DD')
             })
-            return res.render('index', { records, categories, totalAmount, orderBy })
+            return res.render('index', { records, categories, categoryId, totalAmount, orderBy, startDate, endDate })
           })
       })
       .catch(error => console.error(error))
