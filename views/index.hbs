@@ -60,14 +60,33 @@
           <td class="text-wrap text-center fs-6">{{this.itemName}}</td>
           <td class="text-wrap text-center fs-6">{{this.amount}}</td>
           <td class="text-center">
-            <a href="./records/{{this._id}}/edit"><button
-                class="btn btn-outline-info btn-sm edit-btn mx-2 fs-6 "><span
-                  style="color: rgb(88, 160, 180);"><i class="fa-solid fa-pen"></i></span></button></a>
-            <form action="./records/{{this._id}}?_method=DELETE" method="POST"
-              style="display:inline;"><button
-                class="btn btn-outline-info btn-sm delete-btn fs-6"
-                type="submit"><span style="color: rgb(88, 160, 180);"><i
-                    class="fa-solid fa-trash"></i></span></button></form>
+            {{!-- edit button  --}}
+            <a href="./records/{{this._id}}/edit" style="text-decoration: none;">
+              <button class="btn btn-outline-info btn-sm edit-btn mx-2 fs-6 ">
+                <span style="color: rgb(88, 160, 180);"><i class="fa-solid fa-pen"></i></span>
+              </button>
+            </a>
+            {{!-- delete button  --}}
+            <button class="btn btn-outline-info btn-sm delete-btn fs-6" type="button" data-bs-toggle="modal" data-bs-target="#confirmDelete">
+              <span style="color: rgb(88, 160, 180);"><i class="fa-solid fa-trash"></i></span>
+            </button>
+            {{!-- confirm delete modal  --}}
+            <div class="modal fade" id="confirmDelete" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <p class="fs-2">你確定要刪除這筆支出嗎?</p>
+                  </div>
+                  <div class="modal-footer" style="border-top: none;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <form action="./records/{{this._id}}?_method=DELETE" method="POST" style="display:inline;">
+                      <button type="submit" class="btn btn-danger">確定刪除</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{!-- confirm delete modal end  --}}
           </td>
         </tr>
         {{/each}}
