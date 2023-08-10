@@ -7,10 +7,16 @@
                 <div class="card border-secondary mb-3">
                   <div class="card-body p-4 text-secondary">
                     <div class="my-md-4">
-                      <div class="row card-title mb-3">
-                        <div class="col-3 d-flex align-items-end"> <p class="mb-0" style="font-family: huninn;">*為必填欄位</p></div>
-                        <div class="text-center col-9 pt-1">
-                          <h2 class="fw-bold my-3 text-uppercase" style="font-family: huninn;">請修改支出</h2>
+                      <div class="card-title mb-3">
+                        <div class="row">
+                          <div class="text-center col-12 pt-1">
+                            <h2 class="fw-bold my-3 text-uppercase" style="font-family: huninn;">請修改支出</h2>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-5 d-flex align-items-end"> 
+                            <p class="mb-0" style="font-family: huninn;">*為必填欄位</p>
+                          </div>
                         </div>
                       </div>
                         {{> message}}
@@ -37,12 +43,52 @@
                           <div class="col-9"><input type="number" id="amount" name="amount" class="form-control form-control-lg" value="{{record.amount}}" min="1" /></div>
                         </div>
                         <div class="col text-center">
-                          <button class="btn btn-outline-info col-sm-3 fs-5" type="submit">修改</button>
+                          {{!-- edit button --}}
+                          <button class="btn btn-outline-info col-sm-3 fs-5 mx-2" type="button" data-bs-toggle="modal" data-bs-target="#confirmEdit">修改</button>
+                          {{!-- confirm edit modal --}}
+                          <div class="modal fade" id="confirmEdit" tabindex="-1"
+                          aria-labelledby="confirmEditLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-body">
+                                  <p class="fs-2">你確定要修改這筆支出嗎?</p>
+                                </div>
+                                <div class="modal-footer" style="border-top: none;">
+                                  <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">取消</button>
+                                    <button type="submit" class="btn btn-danger">確定修改</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          {{!-- confirm edit modal end --}}
                         </div>
                       </form>
                       <div class="col text-center my-4"> 
+                        {{!-- cancel button  --}}
                         <a href="/"><button class="btn btn-outline-secondary col-sm-3 fs-5" type="button">取消</button></a>
-                        <form action="/records/{{record._id}}?_method=DELETE" method="POST" style="display: inline;" class="mx-2"><button class="btn btn-outline-danger col-sm-3 fs-5" type="submit">刪除</button></form>
+                        {{!-- delete button --}}
+                        <button class="btn btn-outline-danger col-sm-3 fs-5 mx-2" type="button" data-bs-toggle="modal" data-bs-target="#confirmDelete">刪除</button>
+                        {{!-- confirm delete modal --}}
+                        <div class="modal fade" id="confirmDelete" tabindex="-1"
+                          aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-body">
+                                <p class="fs-2">你確定要刪除這筆支出嗎?</p>
+                              </div>
+                              <div class="modal-footer" style="border-top: none;">
+                                <button type="button" class="btn btn-secondary"
+                                  data-bs-dismiss="modal">取消</button>
+                                <form action="/records/{{record._id}}?_method=DELETE"
+                                  method="POST" style="display:inline;">
+                                  <button type="submit" class="btn btn-danger">確定刪除</button>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        {{!-- confirm delete modal end --}}
                       </div>
                     </div>
                   </div>

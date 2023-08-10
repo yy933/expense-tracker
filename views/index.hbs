@@ -1,129 +1,140 @@
-<div class="container">
-  {{!-- sort and order section  --}}
+<div class="container-fluid">
+  <div class="message mt-2">
+    {{> message}}
+  </div>
+  {{!-- sort and order section --}}
   <section class="row d-flex justify-content-center mt-1 mb-3">
-    <div class="col-6 col-md-5 col-lg-4 text-center ">
+    <div class="col-6 col-lg-11 text-center">
       <form action="/sort" method="GET" class="form-group">
-        {{!-- sort by category --}}
-        <div class="sort-category">
-          <label for="categoryId" class="form-label mt-4 fs-4 fw-bold">類別</label>
-          <select class="form-select" id="categoryId" name="categoryId">
-            <option value="all" {{#ifCond categoryId 'all'}} selected
-              {{/ifCond}}>所有類別</option>
-            {{#each categories}}
-            <option value="{{this._id}}" {{#if this.selected}} selected {{/if}}>{{this.name}}</option>{{/each}}
-          </select>
-        </div>
-        {{!-- sort by date --}}
-        <div class="sort-date">
-          <label class="form-label fs-4 fw-bold mt-2" for="startDate">日期</label>
-          <div class="d-flex justify-content-center">
-            <div class="form-outline form-white me-2">
-              <input type="date" id="startDate" name="startDate"
-                class="form-control" value={{startDate}}>
-            </div>
-            <span class="fs-2 fw-bold">-</span>
-            <div class="form-outline form-white ms-2">
-              <input type="date" id="endDate" name="endDate"
-                class="form-control"
-                value={{endDate}}>
+        <div class="row">
+          {{!-- sort by category --}}
+          <div class="sort-category col-lg-3">
+            <label for="categoryId" class="form-label fs-4 fw-bold mt-2">類別</label>
+            <select class="form-select" id="categoryId" name="categoryId">
+              <option value="all" {{#ifCond categoryId 'all'}} selected
+                {{/ifCond}}>所有類別</option>
+              {{#each categories}}
+              <option value="{{this._id}}" {{#if this.selected}} selected
+                {{/if}}>{{this.name}}</option>{{/each}}
+            </select>
+          </div>
+          {{!-- sort by date --}}
+          <div class="sort-date col-lg-4">
+            <label class="form-label fs-4 fw-bold mt-2" for="startDate">日期</label>
+            <div class="d-flex justify-content-center">
+              <div class="form-outline form-white me-2">
+                <input type="date" id="startDate" name="startDate"
+                  class="form-control" value={{startDate}}>
+              </div>
+              <span class="fs-2 fw-bold">-</span>
+              <div class="form-outline form-white ms-2">
+                <input type="date" id="endDate" name="endDate"
+                  class="form-control"
+                  value={{endDate}}>
+              </div>
             </div>
           </div>
+          {{!-- Order by --}}
+          <div class="order-by col-lg-3">
+            <label for="orderBy" class="form-label fs-4 fw-bold mt-2">排序方式</label>
+            <select class="form-select" id="orderBy" name="orderBy">
+              <option value="date-desc" {{#ifCond orderBy 'date-desc'}} selected
+                {{/ifCond}}>日期：近->遠</option>
+              <option value="date-asc" {{#ifCond orderBy 'date-asc'}} selected
+                {{/ifCond}}>日期：遠->近</option>
+              <option value="amount-desc" {{#ifCond orderBy 'amount-desc'}}
+                selected
+                {{/ifCond}}>金額：高->低</option>
+              <option value="amount-asc" {{#ifCond orderBy 'amount-asc'}}
+                selected
+                {{/ifCond}}>金額：低->高</option>
+            </select>
+          </div>
+          {{!-- submit button --}}
+          <div class="submit-btn col-lg-2">
+            <button class="btn btn-dark w-75 fs-5" type="submit"
+              style="margin-top: 50px;">篩選</button>
+          </div>
         </div>
-        {{!-- Order by --}}
-        <div class="order-by">
-          <label for="orderBy" class="form-label fs-4 fw-bold mt-2">排序方式</label>
-          <select class="form-select" id="orderBy" name="orderBy">
-            <option value="date-desc" {{#ifCond orderBy 'date-desc'}} selected
-              {{/ifCond}}>日期：近->遠</option>
-            <option value="date-asc" {{#ifCond orderBy 'date-asc'}} selected
-              {{/ifCond}}>日期：遠->近</option>
-            <option value="amount-desc" {{#ifCond orderBy 'amount-desc'}}
-              selected
-              {{/ifCond}}>金額：高->低</option>
-            <option value="amount-asc" {{#ifCond orderBy 'amount-asc'}} selected
-              {{/ifCond}}>金額：低->高</option>
-          </select>
-        </div>
-        {{!-- submit button --}}
-        <div class="submit-btn">
-          <button class="btn btn-dark mt-3 w-50" type="submit">篩選</button>
-        </div>       
       </form>
     </div>
   </section>
-  {{!-- total amount section  --}}
+  {{!-- total amount section --}}
   <section class="row d-flex my-4">
     <div class="col col-sm-12 text-center">
-      <span class="fs-5 text-muted align-top mx-2" id="totalAmount">總金額:</span>
+      <span class="fs-4 text-muted align-top mx-2" id="totalAmount">總金額:</span>
       <span class="fw-bold mx-3 totalAmount"
-        style="color: rgb(88, 160, 180); font-size:3.8rem">{{totalAmount}}</span>
+        style="color: rgb(88, 160, 180); font-size:4.5rem">{{totalAmount}}</span>
     </div>
   </section>
-  {{!-- record table section  --}}
+  {{!-- record table section --}}
   <section class="row d-flex justify-content-center px-1 my-4">
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th scope="col" class=" fs-5 fw-bold text-center">類別</th>
-          <th scope="col" class=" fs-5 fw-bold text-center">日期</th>
-          <th scope="col" class=" fs-5 fw-bold text-center">名稱</th>
-          <th scope="col" class=" fs-5 fw-bold text-center">金額</th>
-          <th scope="col" class=" fs-5 fw-bold text-center">修改/刪除</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each records}}
-        <tr>
-          <th scope="row" class="text-center fs-4"><span
-              style="color: rgb(88, 160, 180);">{{{this.categoryId.url}}}</span></th>
-          <td class="text-wrap text-center fs-6">{{this.date}}</td>
-          <td class="text-wrap text-center fs-6">{{this.itemName}}</td>
-          <td class="text-wrap text-center fs-6">{{this.amount}}</td>
-          <td class="text-center">
-            {{!-- edit button --}}
-            <a href="./records/{{this._id}}/edit" style="text-decoration: none;">
-              <button class="btn btn-outline-info btn-sm edit-btn mx-2 fs-6 ">
+    <div class="container" style="max-width: 96%;">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col" class=" fs-4 fw-bold text-center">類別</th>
+            <th scope="col" class=" fs-4 fw-bold text-center">日期</th>
+            <th scope="col" class=" fs-4 fw-bold text-center">名稱</th>
+            <th scope="col" class=" fs-4 fw-bold text-center">金額</th>
+            <th scope="col" class=" fs-4 fw-bold text-center">修改/刪除</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each records}}
+          <tr>
+            <th scope="row" class="text-center fs-4"><span
+                style="color: rgb(88, 160, 180);">{{{this.categoryId.url}}}</span></th>
+            <td class="text-wrap text-center fs-5">{{this.date}}</td>
+            <td class="text-wrap text-center fs-5">{{this.itemName}}</td>
+            <td class="text-wrap text-center fs-5">{{this.amount}}</td>
+            <td class="text-center">
+              {{!-- edit button --}}
+              <a href="./records/{{this._id}}/edit"
+                style="text-decoration: none;">
+                <button class="btn btn-outline-info btn-sm edit-btn mx-2 fs-6 ">
+                  <span style="color: rgb(88, 160, 180);"><i
+                      class="fa-solid fa-pen"></i></span>
+                </button>
+              </a>
+              {{!-- delete button --}}
+              <button class="btn btn-outline-info btn-sm delete-btn fs-6"
+                type="button" data-bs-toggle="modal"
+                data-bs-target="#confirmDelete">
                 <span style="color: rgb(88, 160, 180);"><i
-                    class="fa-solid fa-pen"></i></span>
+                    class="fa-solid fa-trash"></i></span>
               </button>
-            </a>
-            {{!-- delete button --}}
-            <button class="btn btn-outline-info btn-sm delete-btn fs-6"
-              type="button" data-bs-toggle="modal"
-              data-bs-target="#confirmDelete">
-              <span style="color: rgb(88, 160, 180);"><i
-                  class="fa-solid fa-trash"></i></span>
-            </button>
-            {{!-- confirm delete modal --}}
-            <div class="modal fade" id="confirmDelete" tabindex="-1"
-              aria-labelledby="confirmDeleteLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-body">
-                    <p class="fs-2">你確定要刪除這筆支出嗎?</p>
-                  </div>
-                  <div class="modal-footer" style="border-top: none;">
-                    <button type="button" class="btn btn-secondary"
-                      data-bs-dismiss="modal">取消</button>
-                    <form action="./records/{{this._id}}?_method=DELETE"
-                      method="POST" style="display:inline;">
-                      <button type="submit" class="btn btn-danger">確定刪除</button>
-                    </form>
+              {{!-- confirm delete modal --}}
+              <div class="modal fade" id="confirmDelete" tabindex="-1"
+                aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <p class="fs-2">你確定要刪除這筆支出嗎?</p>
+                    </div>
+                    <div class="modal-footer" style="border-top: none;">
+                      <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">取消</button>
+                      <form action="./records/{{this._id}}?_method=DELETE"
+                        method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">確定刪除</button>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            {{!-- confirm delete modal end --}}
-          </td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
+              {{!-- confirm delete modal end --}}
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
   </section>
-  {{!-- add new record section  --}}
+  {{!-- add new record section --}}
   <section class="row d-flex justify-content-center my-4">
     <div class="col text-center">
-      <a href="/records/new"><button class="btn btn-outline-info col-sm-3"
+      <a href="/records/new"><button class="btn btn-lg btn-info col-6 col-md-4 col-lg-3 col-xl-2 fs-4"
           style="font-family: huninn;">新增支出</button></a>
     </div>
   </section>

@@ -3,15 +3,21 @@
     <section class="create-section">
           <div class="container">
             <div class="row justify-content-center">
-              <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="col-12 col-md-8 col-lg-6">
                 <div class="card border-secondary mb-3">
                   <div class="card-body p-4 text-secondary">
                     <div class="my-md-4">
-                      <div class="row card-title mb-3">
-                        <div class="col-3 d-flex align-items-end"> <p class="mb-0" style="font-family: huninn;">*為必填欄位</p></div>
-                        <div class="text-center col-9 pt-1">
-                          <h2 class="fw-bold my-3 text-uppercase" style="font-family: huninn;">請輸入支出</h2>
+                      <div class="card-title mb-3">
+                        <div class="row">
+                          <div class="text-center col-12 pt-1">
+                            <h2 class="fw-bold my-3 text-uppercase" style="font-family: huninn;">請輸入支出</h2>
+                          </div>
                         </div>
+                        <div class="row">
+                          <div class="col-5 d-flex align-items-end"> 
+                            <p class="mb-0" style="font-family: huninn;">*為必填欄位</p>
+                          </div>
+                        </div> 
                       </div>
                       {{> message}}
                       <form action="/records/new" method="POST">
@@ -37,9 +43,27 @@
                         <div class="col-3 d-flex align-items-center"> <label class="form-label fs-4 fw-bold" for="amount">金額*：</label></div>
                         <div class="col-9"><input type="number" id="amount" name="amount" class="form-control form-control-lg" min="1" value="{{amount}}"></div>
                       </div>
-                      <div class="col text-center">
-                        <button class="btn btn-outline-info col-sm-3 fs-5" type="submit" >新增支出</button>
-                        <a href="/"><button class="btn btn-outline-secondary col-sm-3 fs-5" type="button">回首頁</button></a>
+                      <div class="text-center">
+                        {{!-- add new record button --}}
+                          <button class="btn btn-outline-info col-sm-5 fs-5" type="button" data-bs-toggle="modal" data-bs-target="#confirmAddNew">新增支出</button>
+                          {{!-- confirm add new record modal --}}
+                          <div class="modal fade" id="confirmAddNew" tabindex="-1"
+                          aria-labelledby="confirmAddNewLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-body">
+                                  <p class="fs-2">你確定要新增這筆支出嗎?</p>
+                                </div>
+                                <div class="modal-footer" style="border-top: none;">
+                                  <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">取消</button>
+                                    <button type="submit" class="btn btn-danger">確定新增</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          {{!-- confirm add new record modal end --}}
+                        <a href="/"><button class="btn btn-outline-secondary col-sm-5 fs-5" type="button">回首頁</button></a>
                       </div>
                       </form> 
                     </div>
