@@ -11,7 +11,7 @@ const homeController = {
         Record.find({ userId })
           .populate('categoryId')
           .lean()
-          .sort({ _id: 'desc' })
+          .sort({ date: 'desc' })
           .then((records) => {
             let totalAmount = 0
             records.forEach(record => {

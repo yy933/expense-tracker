@@ -1,7 +1,7 @@
 const Record = require('../models/Record')
 const Category = require('../models/Category')
 const moment = require('moment')
-
+const recordValidator = require('../helpers/record-validator')
 const recordController = {
   getAddNewRecord: (req, res, next) => {
     Category.find()
@@ -27,20 +27,12 @@ const recordController = {
           date,
           userId
         })
-        const errors = []
         categories.forEach((category) => {
           if (String(category._id) === categoryId) {
             category.selected = true
-          } else {
-            category.selected = false
           }
         })
-        if (!itemName || !amount || !categoryId || !date) {
-          errors.push({ message: '所有欄位都是必填。' })
-        }
-        if (amount <= 0) {
-          errors.push({ message: '金額必須至少為1元' })
-        }
+        const errors = recordValidator(itemName, amount, categoryId, date)
         if (errors.length) {
           return res.render('new', {
             errors,
@@ -54,7 +46,7 @@ const recordController = {
           .save()
           .then(req.flash('success_msg', '成功新增支出!'))
           .then(() => res.redirect('/'))
-          .catch((error) => {
+          .catch(error => {
             console.log(error)
             next(error)
           })
@@ -94,18 +86,12 @@ const recordController = {
         const _id = req.params.id
         const userId = req.user._id
         const { itemName, date, categoryId, amount } = req.body
-        const errors = []
         categories.forEach(category => {
           if (String(category._id) === categoryId) {
             category.selected = true
           }
         })
-        if (!itemName || !amount || !categoryId || !date) {
-          errors.push({ message: '所有欄位都是必填。' })
-        }
-        if (amount <= 0) {
-          errors.push({ message: '金額必須至少為1元' })
-        }
+        const errors = recordValidator(itemName, amount, categoryId, date)
         if (errors.length) {
           return Record.findOne({ _id, userId })
             .lean()
