@@ -13,17 +13,28 @@
   <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
-  
-  <nav class="navbar navbar-light bg-dark container-fluid">
+  <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand fs-3" href="/" style="font-family: 'huninn';color:white">{{#if isAuthenticated}}{{user.name}}的{{/if}}家庭記帳本</a>
-    <form class="d-flex">
-      {{#if isAuthenticated}}
-      <a href="/user/logout" class="btn btn-info btn-sm fs-5 me-2" style="font-family: 'huninn';color:white">登出</a>
-      {{else}}
-      <a href="/user/login" class="btn btn-info btn-sm fs-5 me-2" style="font-family: 'huninn';color:white">登入</a>
-      {{/if}}
-    </form>
+     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav ms-auto">
+        {{#if isAuthenticated}}
+        <li class="nav-item">
+          <a href="/stats" class="nav-link fs-5 me-2" style="font-family: 'huninn';color:white">消費分析</a>
+        </li>
+        <li class="nav-item">
+          <a href="/user/logout" class="nav-link fs-5 me-2" style="font-family: 'huninn';color:white">登出</a>
+        </li>
+        {{else}}
+        <li class="nav-item">
+          <a href="/user/login" class="nav-link fs-5 me-2" style="font-family: 'huninn';color:white">登入</a>
+        </li>
+        {{/if}}
+      </ul>
+    </div>
   </div>
 </nav>
 
