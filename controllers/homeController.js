@@ -1,6 +1,7 @@
 const Record = require('../models/Record')
 const Category = require('../models/Category')
 const moment = require('moment')
+const getOrderOption = require('../helpers/orderBy-options')
 
 const homeController = {
   getHome: (req, res, next) => {
@@ -29,18 +30,7 @@ const homeController = {
     if (!categoryId) {
       return res.redirect('/')
     }
-    let orderOption
-    if (orderBy === 'date-desc') {
-      orderOption = { date: 'desc' }
-    } else if (orderBy === 'date-asc') {
-      orderOption = { date: 'asc' }
-    } else if (orderBy === 'amount-desc') {
-      orderOption = { amount: 'desc' }
-    } else if (orderBy === 'amount-asc') {
-      orderOption = { amount: 'asc' }
-    }
-
-    console.log(req.query)
+    const orderOption = getOrderOption(orderBy)
     Category.find()
       .lean()
       .then(categories => {
