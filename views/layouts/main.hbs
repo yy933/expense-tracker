@@ -23,7 +23,7 @@
       <ul class="navbar-nav ms-auto">
         {{#if isAuthenticated}}
         <li class="nav-item">
-          <a href="/stats" class="nav-link fs-5 me-2" style="font-family: 'huninn';color:white">消費分析</a>
+          <a href="/records/{{user._id}}/stats" class="nav-link fs-5 me-2" style="font-family: 'huninn';color:white">消費分析</a>
         </li>
         <li class="nav-item">
           <a href="/user/logout" class="nav-link fs-5 me-2" style="font-family: 'huninn';color:white">登出</a>

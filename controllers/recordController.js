@@ -2,6 +2,7 @@ const Record = require('../models/Record')
 const Category = require('../models/Category')
 const moment = require('moment')
 const recordValidator = require('../helpers/record-validator')
+const ObjectId = require('mongodb').ObjectId
 const recordController = {
   getAddNewRecord: (req, res, next) => {
     Category.find()
@@ -126,6 +127,107 @@ const recordController = {
         console.log(error)
         next(error)
       })
+  },
+  getStats: async (req, res, next) => {
+    try {
+      const { userId } = req.params
+      const { startDate, endDate } = req.query
+      if (String(req.user._id) !== userId) {
+        return res.redirect('/user/login')
+      }
+      const records = await Record.aggregate([
+        {
+          $match: {
+            userId: ObjectId(userId),
+            ...(startDate && endDate) ? { date: { $gte: new Date(startDate), $lte: new Date(endDate) } } : {}
+          }
+        },
+        {
+          $lookup: {
+            from: 'categories',
+            localField: 'categoryId',
+            foreignField: '_id',
+            as: 'category'
+          }
+        },
+        {
+          $set: {
+            category: '$category.name',
+            icon: '$category.url'
+          }
+        },
+        {
+          $unwind: '$category'
+        },
+        {
+          $unwind: '$icon'
+        },
+        {
+          $facet: {
+            totalAmountOfAllDocs: [
+              {
+                $group: {
+                  _id: 0,
+                  totalAmountOfAllDocs: { $sum: '$amount' }
+                }
+              }
+            ],
+            groupByCategory: [
+              {
+                $group: {
+                  _id: '$category',
+                  totalAmount: { $sum: '$amount' },
+                  icon: { $first: '$icon' }
+                }
+              }
+            ]
+          }
+        },
+        {
+          $addFields: {
+            totalAmountOfAllDocs: {
+              $arrayElemAt: ['$totalAmountOfAllDocs', 0]
+            }
+          }
+        },
+        {
+          $unwind: '$groupByCategory'
+        },
+        {
+          $project: {
+            _id: 0,
+            category: '$groupByCategory._id',
+            icon: '$groupByCategory.icon',
+            totalAmount: '$groupByCategory.totalAmount',
+            percentage: {
+              $multiply: [
+                {
+                  $divide: [
+                    '$groupByCategory.totalAmount',
+                    '$totalAmountOfAllDocs.totalAmountOfAllDocs'
+                  ]
+                }, 100
+              ]
+            }
+          }
+        }
+      ])
+
+      let totalAmount = 0
+      records.forEach(record => {
+        totalAmount += record.totalAmount
+        record.percentage = record.percentage.toFixed(1)
+      })
+      return res.render('stats', {
+        records,
+        totalAmount,
+        startDate,
+        endDate
+      })
+    } catch (error) {
+      console.log(error)
+      next(error)
+    }
   }
 
 }

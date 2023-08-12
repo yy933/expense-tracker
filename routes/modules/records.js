@@ -4,7 +4,7 @@ const recordController = require('../../controllers/recordController')
 
 router.get('/new', recordController.getAddNewRecord)
 router.post('/new', recordController.addNewRecord)
-
+router.get('/:userId/stats', recordController.getStats)
 router.get('/:id/edit', recordController.getEditRecord)
 router.put('/:id', recordController.editRecord)
 router.delete('/:id', recordController.deleteRecord)
