@@ -4,7 +4,7 @@ const Users = require('../models/Users')
 const userController = {
   getLogin: (req, res, next) => {
     try {
-      res.render('login')
+      res.render('users/login')
     } catch (error) {
       console.log(error)
       next(error)
@@ -12,7 +12,7 @@ const userController = {
   },
   getRegister: (req, res, next) => {
     try {
-      res.render('register')
+      res.render('users/register')
     } catch (error) {
       console.log(error)
       next(error)
@@ -28,7 +28,7 @@ const userController = {
       errors.push({ message: '密碼與確認密碼不相符！' })
     }
     if (errors.length) {
-      return res.render('register', {
+      return res.render('users/register', {
         errors,
         name,
         email,
@@ -40,7 +40,7 @@ const userController = {
       if (user) {
         console.log('User already exists!')
         errors.push({ message: '這個 Email 已經註冊過了，請登入' })
-        return res.render('register', {
+        return res.render('users/register', {
           errors,
           name,
           email,
