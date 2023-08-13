@@ -8,7 +8,7 @@ const recordController = {
     Category.find()
       .lean()
       .then(categories => {
-        return res.render('new', { categories })
+        return res.render('records/new', { categories })
       })
       .catch(error => {
         console.log(error)
@@ -35,7 +35,7 @@ const recordController = {
         })
         const errors = recordValidator(itemName, amount, categoryId, date)
         if (errors.length) {
-          return res.render('new', {
+          return res.render('records/new', {
             errors,
             itemName,
             amount,
@@ -72,7 +72,7 @@ const recordController = {
               }
             })
             record.date = moment(record.date).format('YYYY-MM-DD')
-            return res.render('edit', { record, categories })
+            return res.render('records/edit', { record, categories })
           })
           .catch(error => {
             console.log(error)
@@ -98,7 +98,7 @@ const recordController = {
             .lean()
             .then(record => {
               record.date = moment(record.date).format('YYYY-MM-DD')
-              res.render('edit', { errors, record, categories })
+              res.render('records/edit', { errors, record, categories })
             })
             .catch(error => console.log(error))
         }
@@ -218,7 +218,7 @@ const recordController = {
         totalAmount += record.totalAmount
         record.percentage = record.percentage.toFixed(1)
       })
-      return res.render('stats', {
+      return res.render('records/stats', {
         records,
         totalAmount,
         startDate,
