@@ -22,7 +22,10 @@ const homeController = {
             return res.render('index', { records, categories, totalAmount })
           })
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        console.log(error)
+        next(error)
+      })
   },
   getSort: (req, res, next) => {
     const userId = req.user._id
@@ -56,7 +59,10 @@ const homeController = {
             return res.render('index', { records, categories, categoryId, totalAmount, orderBy, startDate, endDate })
           })
       })
-      .catch(error => console.error(error))
+      .catch(error => {
+        console.error(error)
+        next(error)
+      })
   }
 
 }

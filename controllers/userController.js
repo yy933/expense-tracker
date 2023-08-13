@@ -3,10 +3,20 @@ const Users = require('../models/Users')
 
 const userController = {
   getLogin: (req, res, next) => {
-    res.render('login')
+    try {
+      res.render('login')
+    } catch (error) {
+      console.log(error)
+      next(error)
+    }
   },
   getRegister: (req, res, next) => {
-    res.render('register')
+    try {
+      res.render('register')
+    } catch (error) {
+      console.log(error)
+      next(error)
+    }
   },
   register: (req, res, next) => {
     const { name, email, password, confirmPassword } = req.body
@@ -31,6 +41,7 @@ const userController = {
         console.log('User already exists!')
         errors.push({ message: '這個 Email 已經註冊過了，請登入' })
         return res.render('register', {
+          errors,
           name,
           email,
           password,
@@ -50,7 +61,12 @@ const userController = {
         .then(() => res.redirect('/'))
         .catch((error) => console.log(error))
     })
-      .catch(error => console.log(error))
+      .catch(
+        (error) => {
+          console.log(error)
+          next(error)
+        }
+      )
   }
 
 }
