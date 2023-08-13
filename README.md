@@ -1,15 +1,21 @@
 # 家庭記帳本
 ---
+<img src="https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white">
+<img src="https://img.shields.io/badge/Express%20js-000000?style=for-the-badge&logo=express&logoColor=white">
+<img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white">
+<img src="https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white">
+<br>
+
 這是一個使用Node.js（Express框架）搭配MongoDB資料庫所建立的簡易記帳本，使用者註冊帳號並登入後（也可透過Google帳號快速登入），可以新增支出並分類，也可以編輯、刪除帳務紀錄；亦可以根據分類、日期、金額大小等條件篩選帳務記錄。
 <br> 
 同時，也可以經由消費分析檢視各分類支出占總支出金額的比例，亦可以自訂分析日期的範圍。
 <p>
   <h3 style="text-align:center;">登入頁面</h3>
-  <img src="README_images\login page.png" width="100%" alt="login">
+  <img src="./public/README_images/login page.png" width="100%" alt="login">
   <h3 style="text-align:center;">首頁</h3>
-  <img src="README_images\index page.png" width="100%" alt="index">
+  <img src="./public/README_images/index page.png" width="100%" alt="index">
   <h3 style="text-align:center;">消費分析</h3>
-  <img src="README_images\stats page.png" width="100%" alt="stats">
+  <img src="./public/README_images/stats page.png" width="100%" alt="stats">
 </p>
 
 ## 功能 Features
