@@ -1,9 +1,11 @@
 # 家庭記帳本
 ---
+<div style="display:flex;">
 <img src="https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white">
 <img src="https://img.shields.io/badge/Express%20js-000000?style=for-the-badge&logo=express&logoColor=white">
 <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white">
-<img src="https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white">
+<img src="https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white"></div>
+
 <br>
 
 這是一個使用Node.js（Express框架）搭配MongoDB資料庫所建立的簡易記帳本，使用者註冊帳號並登入後（也可透過Google帳號快速登入），可以新增支出並分類，也可以編輯、刪除帳務紀錄；亦可以根據分類、日期、金額大小等條件篩選帳務記錄。
