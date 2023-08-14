@@ -37,7 +37,6 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((id, done) => {
   Users.findById(id)
     .lean()
-    .then(user => delete user.password)
     .then(user => done(null, user))
     .catch(err => done(err, null))
 })
