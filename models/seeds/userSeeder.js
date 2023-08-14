@@ -16,6 +16,8 @@ db.once('open', async () => {
       email: user.email,
       password: bcrypt.hashSync(user.password, bcrypt.genSaltSync(10))
     })
-    console.log('UserSeeder done!')
-  } catch (error) { console.log(error) }
+    console.log('User seeder done!')
+  } catch (error) {
+    console.log(error)
+  }
 })

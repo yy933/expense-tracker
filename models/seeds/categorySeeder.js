@@ -17,5 +17,5 @@ db.once('open', () => {
       url: `<i class="fa-solid ${CATEGORY[category]}"></i>`
     })
   })
-  console.log('CategorySeeder done!')
+  console.log('Category seeder done!')
 })
