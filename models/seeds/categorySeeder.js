@@ -8,14 +8,24 @@ const CATEGORY = {
 }
 const db = require('../../config/mongoose')
 
-db.once('open', () => {
-  console.log('mongodb connected!')
-  const categoryKeyArray = Object.keys(CATEGORY)
-  categoryKeyArray.forEach((category) => {
-    Category.create({
-      name: category,
-      url: `<i class="fa-solid ${CATEGORY[category]}"></i>`
+db.on('error', () => {
+  console.log('mongodb error!')
+})
+db.once('open', async () => {
+  try {
+    console.log('mongodb connected!')
+    const categoryKeyArray = Object.keys(CATEGORY)
+    const categories = categoryKeyArray.map((category) => {
+      return Category.create({
+        name: category,
+        url: `<i class="fa-solid ${CATEGORY[category]}"></i>`
+      })
     })
-  })
-  console.log('Category seeder done!')
+    await Promise.all(categories)
+    console.log('Category seeder done!')
+    return process.exit(0)
+  } catch (error) {
+    console.log(error)
+    return process.exit(1)
+  }
 })
