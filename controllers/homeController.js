@@ -1,4 +1,4 @@
-const Record = require('../models/Record')
+const Record = require('../models/record')
 const Category = require('../models/Category')
 const moment = require('moment')
 const getOrderOption = require('../helpers/orderBy-options')
