@@ -11,11 +11,11 @@ const db = require('../../config/mongoose')
 db.once('open', () => {
   console.log('mongodb connected!')
   const categoryKeyArray = Object.keys(CATEGORY)
-  for (let i = 0; i < Object.keys(CATEGORY).length; i++) {
+  categoryKeyArray.forEach((category) => {
     Category.create({
-      name: categoryKeyArray[i],
-      url: `<i class="fa-solid ${CATEGORY[categoryKeyArray[i]]}"></i>`
+      name: category,
+      url: `<i class="fa-solid ${CATEGORY[category]}"></i>`
     })
-  }
+  })
   console.log('CategorySeeder done!')
 })

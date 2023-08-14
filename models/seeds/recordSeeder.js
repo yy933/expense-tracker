@@ -16,7 +16,7 @@ db.on('error', () => {
 })
 db.once('open', () => {
   console.log('mongodb connected!')
-  Category.find()
+  Category.find().lean()
     .then((category) => {
       const categoryId = category.map((categoryItem) => {
         return categoryItem._id
@@ -24,7 +24,7 @@ db.once('open', () => {
       return categoryId // array
     })
     .then((id) => {
-      for (let i = 0; i < categoryId.length; i++) {
+      for (let i = 0; i < id.length; i++) {
         Record.create({
           name: `Random name ${i}`,
           categoryId: id[i],
