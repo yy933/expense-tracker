@@ -53,7 +53,7 @@ npm install
 ```
 npm run seed
 ```
-當終端機顯示 `mongodb connected!` 、 `recordSeeder done!` 、 `categorySeeder done!` 表示已成功匯入種子資料，按 ctrl + c 結束執行
+當終端機顯示 `mongodb connected!` 、 `User seeder done!` 、 `Category seeder done!`、`Record seeder done!` 表示已成功匯入種子資料，按 ctrl + c 結束執行
 
 5. 啟動伺服器
 ```
