@@ -1,4 +1,4 @@
-const Record = require('../Record')
+const Record = require('../record')
 const Category = require('../Category')
 const User = require('../Users')
 const { faker } = require('@faker-js/faker')
