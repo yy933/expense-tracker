@@ -1,6 +1,6 @@
 <div class="text-center text-muted fs-1 my-3">消費分析</div>
 {{!-- total amount section --}}
-<section class="row my-4">
+<section class="row mt-4 mb-2">
   <div class="col-12 text-center">
     <span class="fs-4 text-muted align-top mx-2" id="totalAmount">總金額:</span>
     <span class="fw-bold mx-3 totalAmount"
@@ -8,7 +8,7 @@
   </div>
 </section>
 {{!-- date range select section --}}
-<section class="row d-flex justify-content-center mt-1 mb-3">
+<section class="row d-flex justify-content-center mt-1 m3-5">
   <div class="text-center">
     <form action="/records/{{user._id}}/stats" method="get">
       <div class="sort-date col-lg-6 offset-lg-3">
@@ -32,6 +32,12 @@
     </form>
   </div>
 </section>
+{{!-- Chart Section  --}}
+<section>
+  <div class="d-flex justify-content-center mt-3" style="height: auto;width:500px; margin:auto">
+    <canvas id="myChart" style="height: auto;width:500px;"></canvas>
+  </div>
+</section>
 {{!-- record table section --}}
 <section class="row d-flex justify-content-center px-1 my-4">
   <div class="container" style="max-width: 96%;">
@@ -45,7 +51,7 @@
       </thead>
       <tbody>
         {{#each records}}
-        <tr>
+        <tr class="records">
           <th scope="row" class="text-center fs-4">
             <span style="color: rgb(88, 160, 180);">{{{this.icon}}}</span>
             <span class="ms-1" style="color: rgb(88, 160, 180);">{{this.category}}</span>
