@@ -3,6 +3,8 @@ const Category = require('../models/Category')
 const moment = require('moment')
 const recordValidator = require('../helpers/record-validator')
 const ObjectId = require('mongodb').ObjectId
+const generateCSV = require('../helpers/write-csv')
+
 const recordController = {
   getAddNewRecord: (req, res, next) => {
     Category.find()
@@ -218,6 +220,12 @@ const recordController = {
         totalAmount += record.totalAmount
         record.percentage = record.percentage.toFixed(1)
       })
+      const csvRecords = records.map(record => {
+        const { icon, ...others } = record
+        return others
+      })
+
+      generateCSV(csvRecords, userId)
       return res.render('records/stats', {
         records,
         totalAmount,
