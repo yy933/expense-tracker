@@ -20,7 +20,8 @@
   <img src="./public/README_images/index page.png" width="100%" alt="index">
   <h3 style="text-align:center;">消費分析</h3>
   <img src="./public/README_images/chart.png" width="100%" alt="chart">
-  <img src="./public/README_images/stats page.png" width="100%" alt="stats">  
+  <img src="./public/README_images/stats page.png" width="100%" alt="stats">
+  <img src="./public/README_images/stats download.png" width="100%" alt="stats-download">    
 </p>
 
 ## 功能 Features
