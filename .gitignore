@@ -15,6 +15,3 @@ node_modules
 
 #dotenv
 *.env
-
-download/
-pkey.json
