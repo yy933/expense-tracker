@@ -220,17 +220,19 @@ const recordController = {
         totalAmount += record.totalAmount
         record.percentage = record.percentage.toFixed(1)
       })
+      // remove icon column from records and generate csv file
       const csvRecords = records.map(record => {
         const { icon, ...others } = record
+        others.date = moment(startDate).format('YYYY/MM/DD') + '-' + moment(endDate).format('YYYY/MM/DD')
         return others
       })
-
       generateCSV(csvRecords, userId)
       return res.render('records/stats', {
         records,
         totalAmount,
         startDate,
-        endDate
+        endDate,
+        userId
       })
     } catch (error) {
       console.log(error)

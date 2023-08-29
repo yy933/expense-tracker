@@ -29,7 +29,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 app.use(flash())
-// app.use('/download', express.static(path.join(__dirname, 'download')))
+app.use('/download', express.static(path.join(__dirname, 'download')))
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
